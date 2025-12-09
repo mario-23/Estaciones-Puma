@@ -10,8 +10,11 @@ body {
     padding: 20px;
     margin: 0;
 }
-
-
+.titulo {
+    text-align: center;
+    font-size: 32px;
+    color: green;
+    margin-bottom: 30px;
 }
 .regresar {
     display: inline-block;
@@ -23,98 +26,56 @@ body {
     text-decoration: none;
     font-size: 18px;
     white-space: nowrap;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
-
-
-@media (max-width: 480px) {
-    .regresar {
-        right: 10px;
-        left: 10px;
-        text-align: center;
-        padding: 10px 18px;
-        font-size: 16px;
-    }
-}
-
 .regresar:hover {
     background: red;
     border-color: green;
 }
-
-
-.titulo {
-    text-align: center;
-    font-size: 32px;
-    color: green;
-    margin-bottom: 30px;
-    margin-top: 80px; 
-}
-
-.contenedor {
+.contenedor-estaciones {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 25px;
+    justify-content: center;
 }
-
-
 .estacion {
-    width: 260px;
     border: 3px solid red;
     padding: 15px;
     border-radius: 10px;
-    text-align: center;
+    width: 280px;
     background: white;
 }
-
 .nombre {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: green;
     margin-bottom: 8px;
+    text-align: center;
 }
-
 .supervisor {
     font-size: 16px;
     color: red;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+    text-align: center;
 }
-
 .foto {
     width: 100%;
     border-radius: 6px;
     cursor: pointer;
 }
-
-
-#visor {
+#imgOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
     display: none;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.85);
-    z-index: 2000;
+    z-index: 1000;
 }
-
-#visor img {
+#imgOverlay img {
     max-width: 90%;
     max-height: 90%;
-    cursor: grab;
-}
-
-.cerrar {
-    position: fixed;
-    top: 20px;
-    right: 30px;
-    font-size: 40px;
-    color: white;
-    cursor: pointer;
-    z-index: 3000;
+    touch-action: pan-x pan-y;
 }
 </style>
 </head>
@@ -124,459 +85,46 @@ body {
 
 <div class="titulo">Estaciones Registradas</div>
 
-<div class="contenedor">
+<div class="contenedor-estaciones">
 
 <div class="estacion">
-    <div class="nombre">Estación: Santo Tomas Carretera</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="santotomas.png" class="foto" onclick="abrirVisor(this.src)">
+    <div class="nombre">Estación 1</div>
+    <div class="supervisor">Supervisor: Juan Pérez</div>
+    <img src="foto1.jpg" class="foto">
 </div>
 
 <div class="estacion">
-    <div class="nombre">Estación: Santo Tomas centro</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="santotomasc.png" class="foto" onclick="abrirVisor(this.src)">
+    <div class="nombre">Estación 2</div>
+    <div class="supervisor">Supervisor: Carlos López</div>
+    <img src="foto2.jpg" class="foto">
 </div>
 
 <div class="estacion">
-    <div class="nombre">Estación: San Sebastian </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="sansebastian.png" class="foto" onclick="abrirVisor(this.src)">
+    <div class="nombre">Estación 3</div>
+    <div class="supervisor">Supervisor: Ana Martínez</div>
+    <img src="foto3.jpg" class="foto">
 </div>
 
-<div class="estacion">
-    <div class="nombre">Estación: Candelaria </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="candelaria.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: San Francisco 2 </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="sanfco2.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Semillero</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="semillero.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Guieneales</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="guineales.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Cuyuta</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="cuyuta.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Costa Cuca Passon</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="costacuca.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Monte Carmelo</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="mc.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Canaan </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="canaan.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: San Francisco Zapotitlan </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="sfcoz.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Oasis Coatepeque </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="oasis.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Cuyutenango </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="cuyotenango.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Triangulo Mazatenango</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="tmazate.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Tulate </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="tulate.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: El Gato</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="gato.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Tiquisate Centro </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="tiquisatecn.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Calle Panama</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="callepanama.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Avenida Centro America </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="avca.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Guatalon</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="Guatalon.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: San Miguel Dueñas</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="dueñas.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Chicacao</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="chicacao.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: San Martin</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="smartin.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Tiquisate Cuchilla </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="tiquisatecu.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Santa Lucia Cotzumalguapa</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="santalu.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Mazatenango </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="mazate.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 El Triangulo</div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="s7triangulo.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 Patulul </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="s7patulul.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 San José </div>
-    <div class="supervisor">Supervisor: Nelson</div>
-    <img src="s7villanueva.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: El Tejar </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="eltejar.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Xela </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="xela.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Nahuala </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="nahuala.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: San Francisco Peten </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="sfcop.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Chabelita 1 </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="chabela1.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Cantabal </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="cantabal.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Maria Tecun </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="mariat.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Eroski </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="eroski.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Bella Luna </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="bl.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Los Esclavos</div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="ls.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Xibalbay </div>
-    <div class="supervisor">Supervisor: Brayan</div>
-    <img src="xby.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Las Pozas Peten </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="lpp.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: San Luis Peten </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="slp.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Boca del Monte </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="bm.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Cerro Lindo </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="cl.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Chiquibul </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="chiqui.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Sonte </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="sonte.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: NTP Marval </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="marval.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Usumatlan </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="umn.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Villa Canales </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="vc.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Matias</div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="matias.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Las Violetas </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="lv.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Zacapa </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="zcp.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 San Rafael </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="s7sr.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 Buenos Aires </div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="s7ba.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 Usumatlan</div>
-    <div class="supervisor">Supervisor: Oscar</div>
-    <img src="s7umn.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: North Pacific </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="np.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: El Rancho 129</div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="er.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Coban Carcha </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="cc.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Santiago Gualan </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="sg.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Coban Merida </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="cm.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Canlech </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="clh.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Salama Centro </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="slac.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Rextoil Transversal </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="trans.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Estación: Chahal </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="chch.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 Carcha </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="s7c.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 Santiago Gualan </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="s7sg.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super 7 La Palmera </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="s7lp.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
-<div class="estacion">
-    <div class="nombre">Tienda: Super7 Gavilanes </div>
-    <div class="supervisor">Supervisor: William</div>
-    <img src="s7g.png" class="foto" onclick="abrirVisor(this.src)">
-</div>
-
 </div>
 
-<div id="visor" onclick="cerrarVisor()">
-    <span class="cerrar">&times;</span>
-    <img id="zoomImg" src="">
+<div id="imgOverlay">
+    <img id="imgGrande" src="">
 </div>
-
 
 <script>
-!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t=t||self).Panzoom=e()}(this,function(){return function t(e,n){function o(r){if(i[r])return i[r].exports;var a=i[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,o),a.l=!0,a.exports}var i={};return o.m=e,o.c=i,o.d=function(t,e,n){o.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},o.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},o.t=function(t,e){if(1&e&&(t=o(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(o.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var i in t)o.d(n,i,function(e){return t[e]}.bind(null,i));return n},o.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},o.p="",o(o.s=0)}([function(t,e){t.exports=function(t,e){e=e||{};var n=t.style;var o=1;var i=0;var r=0;function a(){n.transform=`scale(${o}) translate(${i}px, ${r}px)`}t.addEventListener("wheel",function(t){t.preventDefault();var e=t.deltaY<0?1.1:.9;o*=e,a()});var u=!1;var l=0;var f=0;t.addEventListener("mousedown",function(t){u=!0,l=t.clientX,f=t.clientY});t.addEventListener("mouseup",function(){u=!1});t.addEventListener("mousemove",function(t){if(!u)return;i+=t.clientX-l,r+=t.clientY-f,l=t.clientX,f=t.clientY,a()});return{zoomIn:function(){o*=1.2,a()},zoomOut:function(){o*=.8,a()}}}}])});
-</script>
+document.querySelectorAll(".foto").forEach(img => {
+    img.addEventListener("click", () => {
+        document.getElementById("imgGrande").src = img.src;
+        document.getElementById("imgOverlay").style.display = "flex";
+    });
+});
 
-<script>
-let panzoomInstance;
-
-function abrirVisor(src) {
-    const visor = document.getElementById("visor");
-    const img = document.getElementById("zoomImg");
-
-    visor.style.display = "flex";
-    img.src = src;
-
-
-    setTimeout(() => {
-        if (typeof Panzoom === 'function') {
-            panzoomInstance = Panzoom(img);
-        }
-    }, 100);
-}
-
-function cerrarVisor() {
-    document.getElementById("visor").style.display = "none";
-    document.getElementById("zoomImg").src = "";
-
-
-    panzoomInstance = null;
-}
+document.getElementById("imgOverlay").addEventListener("click", e => {
+    if (e.target.id === "imgOverlay") {
+        document.getElementById("imgOverlay").style.display = "none";
+        document.getElementById("imgGrande").src = "";
+    }
+});
 </script>
 
 </body>
