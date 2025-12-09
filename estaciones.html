@@ -589,22 +589,23 @@ function cerrarVisor() {
 }
 </script>
  <script>
-  const imgs = document.querySelectorAll('img');
-  let existentes = 0;
-  let faltantes = 0;
+ const imgs = document.querySelectorAll('img.foto'); 
+let existentes = 0;
+let faltantes = 0;
 
-  imgs.forEach(img => {
-    const testImg = new Image();
-    testImg.src = img.src;
+imgs.forEach(img => {
+  const testImg = new Image();
+  testImg.src = img.src;
 
-    testImg.onload = () => { existentes++; actualizar(); };
-    testImg.onerror = () => { faltantes++; actualizar(); };
-  });
+  testImg.onload = () => { existentes++; actualizar(); };
+  testImg.onerror = () => { faltantes++; actualizar(); };
+});
 
-  function actualizar() {
-    document.getElementById('contador').textContent =
-      `Existentes: ${existentes} | Faltantes: ${faltantes}`;
-  }
+function actualizar() {
+  document.getElementById('contador').textContent =
+    `Existentes: ${existentes} | Faltantes: ${faltantes}`;
+}
+
 </script>
 </body>
 </html>
