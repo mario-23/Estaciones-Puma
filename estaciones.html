@@ -113,10 +113,25 @@ body {
     cursor: pointer;
     z-index: 3000;
 }
+    <style>
+  #contador {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 128, 0, 0.8);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    z-index: 1000;
+  }
+</style>
 </style>
 </head>
 <body>
-
+    
+<div id="contador">Cargando...</div>
 <a href="index.html" class="regresar">Regresar</a>
 
 <div class="titulo">Estaciones Terminadas</div>
@@ -575,6 +590,23 @@ function cerrarVisor() {
     panzoomInstance = null;
 }
 </script>
+<script>
+  const imgs = document.querySelectorAll('img');
+  let existentes = 0;
+  let faltantes = 0;
 
+  imgs.forEach(img => {
+    const testImg = new Image();
+    testImg.src = img.src;
+
+    testImg.onload = () => { existentes++; actualizar(); };
+    testImg.onerror = () => { faltantes++; actualizar(); };
+  });
+
+  function actualizar() {
+    document.getElementById('contador').textContent =
+      `Existentes: ${existentes} | Faltantes: ${faltantes}`;
+  }
+</script>
 </body>
 </html>
