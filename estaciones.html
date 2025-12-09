@@ -25,8 +25,6 @@ body {
     text-align: right;
     float: right;      
 }
-}
-
 
 @media (max-width: 480px) {
     .regresar {
@@ -35,7 +33,7 @@ body {
         padding: 10px 18px;
         font-size: 16px;
     }
-}
+
 
 .regresar:hover {
     background: red;
@@ -98,7 +96,7 @@ body {
     z-index: 2000;
 }
 
-#visor img {
+#visorimg {
     max-width: 90%;
     max-height: 90%;
     cursor: default;
@@ -591,22 +589,22 @@ function cerrarVisor() {
 }
 </script>
 <script>
-  const imgs = document.querySelectorAll('img');
-  let existentes = 0;
-  let faltantes = 0;
+ const imgs = document.querySelectorAll('img.foto'); // ahora solo cuenta las imágenes de estaciones/tiendas
+let existentes = 0;
+let faltantes = 0;
 
-  imgs.forEach(img => {
-    const testImg = new Image();
-    testImg.src = img.src;
+imgs.forEach(img => {
+  const testImg = new Image();
+  testImg.src = img.src;
 
-    testImg.onload = () => { existentes++; actualizar(); };
-    testImg.onerror = () => { faltantes++; actualizar(); };
-  });
+  testImg.onload = () => { existentes++; actualizar(); };
+  testImg.onerror = () => { faltantes++; actualizar(); };
+});
 
-  function actualizar() {
-    document.getElementById('contador').textContent =
-      `Existentes: ${existentes} | Faltantes: ${faltantes}`;
-  }
+function actualizar() {
+  document.getElementById('contador').textContent =
+    `Existentes: ${existentes} | Faltantes: ${faltantes}`;
+}
 </script>
 </body>
 </html>
