@@ -550,10 +550,9 @@ body {
     <img src="s7g.png" class="foto" onclick="abrirVisor(this.src)">
 </div>
 
-</div>
 
 <div id="visor" onclick="cerrarVisorFondo(event)">
-    <span class="cerrar" onclick="cerrarVisor()">&times;</span>
+    <span class="cerrar" onclick="cerrarVisor(event)">&times;</span>
     <img id="zoomImg" src="">
 </div>
 
@@ -582,7 +581,8 @@ function abrirVisor(src) {
     img.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
 }
 
-function cerrarVisor() {
+function cerrarVisor(event) {
+    event.stopPropagation();
     const visor = document.getElementById("visor");
     const img = document.getElementById("zoomImg");
 
@@ -598,7 +598,7 @@ function cerrarVisor() {
 function cerrarVisorFondo(event) {
     const img = document.getElementById("zoomImg");
     if (event.target !== img) {
-        cerrarVisor();
+        cerrarVisor(event);
     }
 }
 </script>
