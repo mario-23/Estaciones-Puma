@@ -83,34 +83,20 @@ body {
     cursor: pointer;
 }
 
-#contador {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 128, 0, 0.8);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    z-index: 1000;
-}
-
 #visor {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.85);
     display: none;
     justify-content: center;
     align-items: center;
+    background: rgba(0,0,0,0.85);
     z-index: 2000;
-    cursor: pointer;
 }
 
-#visor img {
+#zoomImg {
     max-width: 90%;
     max-height: 90%;
     cursor: grab;
@@ -125,6 +111,20 @@ body {
     cursor: pointer;
     z-index: 3000;
 }
+
+  #contador {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 128, 0, 0.8);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    z-index: 1000;
+  }
+
 </style>
 </head>
 <body>
@@ -567,12 +567,42 @@ body {
         <img src="santotomasc.png" class="foto" onclick="abrirVisor(this.src)">
     </div>
 
-<script id="gd-image-viewer"
-        src="https://unpkg.com/image-viewer-js@latest/dist/image-viewer.min.js"
-        data-target-selector="img.foto"
-        data-max-scale="5"
-        data-min-scale="0.5">
+<div id="visor" onclick="cerrarVisor()">
+    <span class="cerrar">&times;</span>
+    <img id="zoomImg" src="">
+</div>
+
+<script>
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t=t||self).Panzoom=e()}(this,function(){return function t(e,n){function o(r){if(i[r])return i[r].exports;var a=i[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,o),a.l=!0,a.exports}var i={};return o.m=e,o.c=i,o.d=function(t,e,n){o.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},o.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},o.t=function(t,e){if(1&e&&(t=o(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(o.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var i in t)o.d(n,i,function(e){return t[e]}.bind(null,i));return n},o.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},o.p="",o(o.s=0)}([function(t,e){t.exports=function(t,e){e=e||{};var n=t.style;var o=1;var i=0;var r=0;function a(){n.transform=`scale(${o}) translate(${i}px, ${r}px)`}t.addEventListener("wheel",function(t){t.preventDefault();var e=t.deltaY<0?1.1:.9;o*=e,a()});var u=!1;var l=0;var f=0;t.addEventListener("mousedown",function(t){u=!0,l=t.clientX,f=t.clientY});t.addEventListener("mouseup",function(){u=!1});t.addEventListener("mousemove",function(t){if(!u)return;i+=t.clientX-l,r+=t.clientY-f,l=t.clientX,f=t.clientY,a()});return{zoomIn:function(){o*=1.2,a()},zoomOut:function(){o*=.8,a()}}}}])});
 </script>
+
+<script>
+let panzoomInstance;
+
+function abrirVisor(src) {
+    const visor = document.getElementById("visor");
+    const img = document.getElementById("zoomImg");
+
+    visor.style.display = "flex";
+    img.src = src;
+
+
+    setTimeout(() => {
+        if (typeof Panzoom === 'function') {
+            panzoomInstance = Panzoom(img);
+        }
+    }, 100);
+}
+
+function cerrarVisor() {
+    document.getElementById("visor").style.display = "none";
+    document.getElementById("zoomImg").src = "";
+
+
+    panzoomInstance = null;
+}
+</script>
+
     
  <script>
  const imgs = document.querySelectorAll('img.foto'); 
