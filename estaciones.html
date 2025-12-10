@@ -83,6 +83,19 @@ body {
     cursor: pointer;
 }
 
+#contador {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 128, 0, 0.8);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    z-index: 1000;
+}
+
 #visor {
     position: fixed;
     top: 0;
@@ -96,7 +109,7 @@ body {
     z-index: 2000;
 }
 
-#zoomImg {
+#visor img {
     max-width: 90%;
     max-height: 90%;
     cursor: grab;
@@ -111,20 +124,6 @@ body {
     cursor: pointer;
     z-index: 3000;
 }
-
-  #contador {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 128, 0, 0.8);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    z-index: 1000;
-  }
-
 </style>
 </head>
 <body>
@@ -551,7 +550,25 @@ body {
 </div>
 
 
-<div id="visor" onclick="cerrarVisorFondo(event)">
+<div id="contador">Cargando...</div>
+<a href="index.html" class="regresar">Regresar</a>
+<div class="titulo">Estaciones Terminadas</div>
+
+<div class="contenedor">
+    <div class="estacion">
+        <div class="nombre">Estación: Santo Tomas Carretera</div>
+        <div class="supervisor">Supervisor: Nelson</div>
+        <img src="santotomas.png" class="foto" onclick="abrirVisor(this.src)">
+    </div>
+    <div class="estacion">
+        <div class="nombre">Estación: Santo Tomas centro</div>
+        <div class="supervisor">Supervisor: Nelson</div>
+        <img src="santotomasc.png" class="foto" onclick="abrirVisor(this.src)">
+    </div>
+    <!-- Resto de tus estaciones aquí -->
+</div>
+
+<div id="visor">
     <span class="cerrar" onclick="cerrarVisor(event)">&times;</span>
     <img id="zoomImg" src="">
 </div>
@@ -564,44 +581,52 @@ let panzoomInstance;
 function abrirVisor(src) {
     const visor = document.getElementById("visor");
     const img = document.getElementById("zoomImg");
-
     visor.style.display = "flex";
     img.src = src;
 
-    if (panzoomInstance) {
-        panzoomInstance.destroy();
-    }
+    if (panzoomInstance) panzoomInstance.destroy();
 
-    panzoomInstance = Panzoom(img, {
-        maxScale: 5,
-        minScale: 1,
-        contain: 'outside'
-    });
-
-    img.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
+    setTimeout(() => {
+        panzoomInstance = Panzoom(img, {
+            maxScale: 5,
+            minScale: 1,
+            contain: 'outside'
+        });
+        img.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
+    }, 50);
 }
 
 function cerrarVisor(event) {
     event.stopPropagation();
     const visor = document.getElementById("visor");
     const img = document.getElementById("zoomImg");
-
     visor.style.display = "none";
     img.src = "";
-
     if (panzoomInstance) {
         panzoomInstance.destroy();
         panzoomInstance = null;
     }
 }
 
-function cerrarVisorFondo(event) {
-    const img = document.getElementById("zoomImg");
-    if (event.target !== img) {
-        cerrarVisor(event);
-    }
+document.getElementById("visor").addEventListener("click", function(e){
+    if(e.target.id === "visor") cerrarVisor(e);
+});
+
+const imgs = document.querySelectorAll('img');
+let existentes = 0;
+let faltantes = 0;
+imgs.forEach(img => {
+    const testImg = new Image();
+    testImg.src = img.src;
+    testImg.onload = () => { existentes++; actualizar(); };
+    testImg.onerror = () => { faltantes++; actualizar(); };
+});
+function actualizar() {
+    document.getElementById('contador').textContent =
+      `Existentes: ${existentes} | Faltantes: ${faltantes}`;
 }
 </script>
+    
  <script>
  const imgs = document.querySelectorAll('img.foto'); 
 let Terminadas = 0;
