@@ -590,20 +590,20 @@ function cerrarVisor() {
 </script>
  <script>
  const imgs = document.querySelectorAll('img.foto'); 
-let existentes = 0;
-let faltantes = 0;
+let Terminadas = 0;
+let Faltantes = 0;
 
 imgs.forEach(img => {
   const testImg = new Image();
   testImg.src = img.src;
 
-  testImg.onload = () => { existentes++; actualizar(); };
-  testImg.onerror = () => { faltantes++; actualizar(); };
+  testImg.onload = () => { Terminadas++; actualizar(); };
+  testImg.onerror = () => { Faltantes++; actualizar(); };
 });
 
 function actualizar() {
   document.getElementById('contador').textContent =
-    `Existentes: ${existentes} | Faltantes: ${faltantes}`;
+    `Terminadas: ${Terminadas} | Faltantes: ${Faltantes}`;
 }
 
 </script>
