@@ -96,10 +96,10 @@ body {
     z-index: 2000;
 }
 
-#visor img {
+#zoomImg {
     max-width: 90%;
     max-height: 90%;
-    cursor: default;
+    cursor: grab;
 }
 
 .cerrar {
@@ -554,36 +554,10 @@ body {
 
 <div id="visor" onclick="cerrarVisorFondo(event)">
     <span class="cerrar" onclick="cerrarVisor()">&times;</span>
-    <div id="zoomContainer">
-        <img id="zoomImg" src="">
-    </div>
+    <img id="zoomImg" src="">
 </div>
 
-<style>
-#visor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,0.85);
-    z-index: 2000;
-}
-
-#zoomContainer {
-    overflow: hidden;
-    max-width: 90%;
-    max-height: 90%;
-}
-
-#zoomImg {
-    display: block;
-    cursor: grab;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@9.4.0/dist/panzoom.min.js"></script>
 
 <script>
 let panzoomInstance;
@@ -597,18 +571,15 @@ function abrirVisor(src) {
 
     if (panzoomInstance) {
         panzoomInstance.destroy();
-        panzoomInstance = null;
     }
 
-    setTimeout(() => {
-        if (typeof Panzoom === 'function') {
-            panzoomInstance = Panzoom(img, {
-                contain: 'outside',
-                maxScale: 5,
-                minScale: 1
-            });
-        }
-    }, 50);
+    panzoomInstance = Panzoom(img, {
+        maxScale: 5,
+        minScale: 1,
+        contain: 'outside'
+    });
+
+    img.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
 }
 
 function cerrarVisor() {
@@ -625,8 +596,8 @@ function cerrarVisor() {
 }
 
 function cerrarVisorFondo(event) {
-    const container = document.getElementById("zoomContainer");
-    if (!container.contains(event.target)) {
+    const img = document.getElementById("zoomImg");
+    if (event.target !== img) {
         cerrarVisor();
     }
 }
