@@ -102,11 +102,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0,0,0,0.85);
     display: none;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.85);
     z-index: 2000;
+    cursor: pointer;
 }
 
 #visor img {
@@ -565,66 +566,12 @@ body {
         <div class="supervisor">Supervisor: Nelson</div>
         <img src="santotomasc.png" class="foto" onclick="abrirVisor(this.src)">
     </div>
-    <!-- Resto de tus estaciones aquí -->
-</div>
 
-<div id="visor">
-    <span class="cerrar" onclick="cerrarVisor(event)">&times;</span>
-    <img id="zoomImg" src="">
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@9.4.0/dist/panzoom.min.js"></script>
-
-<script>
-let panzoomInstance;
-
-function abrirVisor(src) {
-    const visor = document.getElementById("visor");
-    const img = document.getElementById("zoomImg");
-    visor.style.display = "flex";
-    img.src = src;
-
-    if (panzoomInstance) panzoomInstance.destroy();
-
-    setTimeout(() => {
-        panzoomInstance = Panzoom(img, {
-            maxScale: 5,
-            minScale: 1,
-            contain: 'outside'
-        });
-        img.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
-    }, 50);
-}
-
-function cerrarVisor(event) {
-    event.stopPropagation();
-    const visor = document.getElementById("visor");
-    const img = document.getElementById("zoomImg");
-    visor.style.display = "none";
-    img.src = "";
-    if (panzoomInstance) {
-        panzoomInstance.destroy();
-        panzoomInstance = null;
-    }
-}
-
-document.getElementById("visor").addEventListener("click", function(e){
-    if(e.target.id === "visor") cerrarVisor(e);
-});
-
-const imgs = document.querySelectorAll('img');
-let existentes = 0;
-let faltantes = 0;
-imgs.forEach(img => {
-    const testImg = new Image();
-    testImg.src = img.src;
-    testImg.onload = () => { existentes++; actualizar(); };
-    testImg.onerror = () => { faltantes++; actualizar(); };
-});
-function actualizar() {
-    document.getElementById('contador').textContent =
-      `Existentes: ${existentes} | Faltantes: ${faltantes}`;
-}
+<script id="gd-image-viewer"
+        src="https://unpkg.com/image-viewer-js@latest/dist/image-viewer.min.js"
+        data-target-selector="img.foto"
+        data-max-scale="5"
+        data-min-scale="0.5">
 </script>
     
  <script>
