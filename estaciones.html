@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,36 +112,42 @@ body {
     z-index: 3000;
 }
 
-#contador {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 128, 0, 0.8);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    z-index: 1000;
+.topbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
-    #buscador {
+
+
+#contador {
+    position: static;
+}
+
+
+#buscador {
+    margin: 0 auto;
     width: 90%;
     max-width: 400px;
     padding: 12px;
     font-size: 18px;
-    border: 2px solid green;
+    border: 2px solid red;
     border-radius: 8px;
-    display: block;
-    margin: 20px auto;
-    align: center;    
 }
+    
 </style>
 </head>
 <body>
 
-<div id="contador">Cargando...</div>
-<a href="index.html" class="regresar">Regresar</a>
-<input type="text" id="buscador" placeholder="Buscar estación..." onkeyup="filtrarEstaciones()">
+<div class="topbar">
+    <div id="contador">Cargando...</div>
+
+    <input type="text" id="buscador" placeholder="Buscar estación..." onkeyup="filtrarEstaciones()">
+
+    <a href="index.html" class="regresar">Regresar</a>
+</div>
+
 <div class="titulo">Estaciones Terminadas</div>
 
 <div class="contenedor">
