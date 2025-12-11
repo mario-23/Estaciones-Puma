@@ -10,9 +10,14 @@ body {
     padding: 20px;
     margin: 0;
 }
-
+.top-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    margin-bottom: 20px;   
+}
 .regresar {
-    display: inline-block;
     background: green;
     color: white;
     padding: 12px 22px;
@@ -21,25 +26,13 @@ body {
     text-decoration: none;
     font-size: 18px;
     white-space: nowrap;
-    margin-bottom: 20px;
-    text-align: right;
-    float: right;      
-}
-
-@media (max-width: 480px) {
-    .regresar {
-        left: 10px;
-        top: 10px;
-        padding: 10px 18px;
-        font-size: 16px;
-    }
 }
 
 .regresar:hover {
     background: red;
     border-color: green;
-}
 
+} 
 .titulo {
     text-align: center;
     font-size: 32px;
@@ -113,27 +106,21 @@ body {
 }
 
 #contador {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 128, 0, 0.8);
+    background: rgba(0,128,0,0.8);
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
-    font-family: Arial, sans-serif;
     font-size: 16px;
-    z-index: 1000;
 }
 
-    #buscador {
-    width: 90%;
-    max-width: 400px;
+#buscador {
+    width: 300px;
     padding: 12px;
     font-size: 18px;
     border: 2px solid green;
     border-radius: 8px;
-    display: block;
-    margin: 20px auto;
+    text-align: center;
+    margin: 0;
 }
     
 </style>
@@ -141,6 +128,13 @@ body {
 <body>
 
 <div id="contador">Cargando...</div>
+<div class="top-bar">
+    <a class="regresar" href="index.html">Regresar</a>
+
+    <input type="text" id="buscador" placeholder="Buscar estación..." onkeyup="filtrarEstaciones()">
+
+    <div id="contador">0</div>
+</div>    
 <a href="index.html" class="regresar">Regresar</a>
 <input type="text" id="buscador" placeholder="Buscar estación..." onkeyup="filtrarEstaciones()">
 <div class="titulo">Estaciones Terminadas</div>
