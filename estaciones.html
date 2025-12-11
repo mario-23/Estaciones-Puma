@@ -124,13 +124,25 @@ body {
     font-size: 16px;
     z-index: 1000;
 }
+
+    #buscador {
+    width: 90%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid green;
+    border-radius: 8px;
+    display: block;
+    margin: 20px auto;
+}
+    
 </style>
 </head>
 <body>
 
 <div id="contador">Cargando...</div>
 <a href="index.html" class="regresar">Regresar</a>
-
+<input type="text" id="buscador" placeholder="Buscar estación..." onkeyup="filtrarEstaciones()">
 <div class="titulo">Estaciones Terminadas</div>
 
 <div class="contenedor">
@@ -603,5 +615,21 @@ function actualizar() {
 }
 </script>
 
+    <script>
+function filtrarEstaciones() {
+    const texto = document.getElementById("buscador").value.toLowerCase();
+    const estaciones = document.querySelectorAll(".estacion");
+
+    estaciones.forEach(est => {
+        const nombre = est.querySelector(".nombre").textContent.toLowerCase();
+
+        if (nombre.includes(texto)) {
+            est.style.display = "block";
+        } else {
+            est.style.display = "none";
+        }
+    });
+}
+</script>
 </body>
 </html>
